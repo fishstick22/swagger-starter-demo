@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import io.swagger.annotations.Api;
+
 //http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
 @CrossOrigin 
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "Communcations" })
 public class CommunicationController {
 
 	@Autowired

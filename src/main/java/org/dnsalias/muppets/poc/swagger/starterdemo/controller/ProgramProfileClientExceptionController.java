@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "Clients Profile Exceptions" })
 public class ProgramProfileClientExceptionController {
 
 	@Autowired
@@ -50,7 +53,7 @@ public class ProgramProfileClientExceptionController {
 	}
 	
 	@RequestMapping(value="/programprofileclientexception/{id}", method = RequestMethod.PUT )
-	public ResponseEntity<ProgramProfileClientException> updateProgramProfileClientException(@RequestBody ProgramProfileClientException programProfileClientException) {
+	public ResponseEntity<ProgramProfileClientException> updateProgramProfileClientException(@PathVariable("id") Integer id, @RequestBody ProgramProfileClientException programProfileClientException) {
 		programProfileClientExceptionService.updateProgramProfileClientException(programProfileClientException);
 		return new ResponseEntity<ProgramProfileClientException>(programProfileClientException, HttpStatus.OK);
 	}

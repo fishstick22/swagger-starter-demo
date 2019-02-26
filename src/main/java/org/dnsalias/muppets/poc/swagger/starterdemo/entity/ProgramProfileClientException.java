@@ -2,24 +2,26 @@ package org.dnsalias.muppets.poc.swagger.starterdemo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
+@Getter @Setter @NoArgsConstructor @ToString(exclude = {"program", "client"})
 @JsonIdentityInfo(
 		generator=ObjectIdGenerators.PropertyGenerator.class, 
 		property="id",
@@ -33,7 +35,7 @@ public class ProgramProfileClientException implements Serializable {
 	private static final long serialVersionUID = 1998700964863311421L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private char defaultOptIn; // Y/N
 	private char visibleInUi; // Y/N/P(romote)
@@ -53,94 +55,10 @@ public class ProgramProfileClientException implements Serializable {
 	@JoinColumn(name="program_id", nullable=false)
 	@JsonIdentityReference(alwaysAsId = true)
 	private Program program;	// DB FK
-
-	public Program getProgram() {
-		return program;
-	}
-	public void setProgram(Program program) {
-		this.program = program;
-	}
 	
 	@ManyToOne
 	@JoinColumn(name="client_id", nullable=false)
-	// @JsonIdentityReference(alwaysAsId = true)
+	@JsonIdentityReference(alwaysAsId = true)
 	private Client client;	// DB FK
-	
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public char getDefaultOptIn() {
-		return defaultOptIn;
-	}
-	public void setDefaultOptIn(char defaultOptIn) {
-		this.defaultOptIn = defaultOptIn;
-	}
-	public char getVisibleInUi() {
-		return visibleInUi;
-	}
-	public void setVisibleInUi(char visibleInUi) {
-		this.visibleInUi = visibleInUi;
-	}
-	public char getChanEmail() {
-		return chanEmail;
-	}
-	public void setChanEmail(char chanEmail) {
-		this.chanEmail = chanEmail;
-	}
-	public char getChanIvr() {
-		return chanIvr;
-	}
-	public void setChanIvr(char chanIvr) {
-		this.chanIvr = chanIvr;
-	}
-	public char getChanSms() {
-		return chanSms;
-	}
-	public void setChanSms(char chanSms) {
-		this.chanSms = chanSms;
-	}
-	public char getChanSecure() {
-		return chanSecure;
-	}
-	public void setChanSecure(char chanSecure) {
-		this.chanSecure = chanSecure;
-	}
-	public char getChanMail() {
-		return chanMail;
-	}
-	public void setChanMail(char chanMail) {
-		this.chanMail = chanMail;
-	}
-	public char getChanMobile() {
-		return chanMobile;
-	}
-	public void setChanMobile(char chanMobile) {
-		this.chanMobile = chanMobile;
-	}
-	
-	public Date getEffective() {
-		return effective;
-	}
-	public void setEffective(Date effective) {
-		this.effective = effective;
-	}
-	public Date getExpiration() {
-		return expiration;
-	}
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
-	}
 
 }

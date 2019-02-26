@@ -15,10 +15,16 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 //https://dzone.com/articles/circular-dependencies-jackson
 @Entity
 //https://stackoverflow.com/questions/15422838/jsonmappingexception-already-had-pojo-for-id
 //https://stackoverflow.com/questions/44007188/deserialize-json-with-spring-unresolved-forward-references-jackson-exception
+@Getter @Setter @NoArgsConstructor @ToString(exclude = {"program", "communication"})
 @JsonIdentityInfo(
 		generator=ObjectIdGenerators.PropertyGenerator.class, 
 		property="id",
@@ -32,7 +38,7 @@ public class ProgramConfiguration implements Serializable {
 	private static final long serialVersionUID = -1312813636559120957L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
@@ -56,108 +62,9 @@ public class ProgramConfiguration implements Serializable {
 	@JsonIdentityReference(alwaysAsId = true)
 	private Program program;	// DB FK
 
-	public Program getProgram() {
-		return program;
-	}
-	public void setProgram(Program program) {
-		this.program = program;
-	}
-
 	@ManyToOne
 	@JoinColumn(name="communication_id", nullable=false)
 	@JsonIdentityReference(alwaysAsId = true)
 	private Communication communication;	// DB FK
-	
-	public Communication getCommunication() {
-		return communication;
-	}
-	public void setCommunication(Communication communication) {
-		this.communication = communication;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public int getChanEmailPriority() {
-		return chanEmailPriority;
-	}
-	public void setChanEmailPriority(int chanEmailPriority) {
-		this.chanEmailPriority = chanEmailPriority;
-	}
-	public int getChanIvrPriority() {
-		return chanIvrPriority;
-	}
-	public void setChanIvrPriority(int chanIvrPriority) {
-		this.chanIvrPriority = chanIvrPriority;
-	}
-	public int getChanSmsPriority() {
-		return chanSmsPriority;
-	}
-	public void setChanSmsPriority(int chanSmsPriority) {
-		this.chanSmsPriority = chanSmsPriority;
-	}
-	public int getChanSecurePriority() {
-		return chanSecurePriority;
-	}
-	public void setChanSecurePriority(int chanSecurePriority) {
-		this.chanSecurePriority = chanSecurePriority;
-	}
-	public int getChanMailPriority() {
-		return chanMailPriority;
-	}
-	public void setChanMailPriority(int chanMailPriority) {
-		this.chanMailPriority = chanMailPriority;
-	}
-	public int getChanMobilePriority() {
-		return chanMobilePriority;
-	}
-	public void setChanMobilePriority(int chanMobilePriority) {
-		this.chanMobilePriority = chanMobilePriority;
-	}
-	public String getChanDefault() {
-		return chanDefault;
-	}
-	public void setChanDefault(String chanDefault) {
-		this.chanDefault = chanDefault;
-	}
-	public char getRequired() {
-		return required;
-	}
-	public void setRequired(char required) {
-		this.required = required;
-	}
-	public char getMandatory() {
-		return mandatory;
-	}
-	public void setMandatory(char mandatory) {
-		this.mandatory = mandatory;
-	}
-	public Date getEffective() {
-		return effective;
-	}
-	public void setEffective(Date effective) {
-		this.effective = effective;
-	}
-	public Date getExpiration() {
-		return expiration;
-	}
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
-	}
 
 }

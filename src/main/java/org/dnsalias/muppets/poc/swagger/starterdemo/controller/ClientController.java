@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin 
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "Clients" })
 public class ClientController {
 
 	@Autowired

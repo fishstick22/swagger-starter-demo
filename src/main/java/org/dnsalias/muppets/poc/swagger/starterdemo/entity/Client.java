@@ -13,8 +13,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope = Program.class)
+@Getter @Setter @NoArgsConstructor @ToString(exclude = {"programProfileClientException", "clientConfiguration"})
 @JsonIdentityInfo(
 		generator=ObjectIdGenerators.PropertyGenerator.class, 
 		property="id",
@@ -36,40 +41,8 @@ public class Client implements Serializable {
 	@JsonIdentityReference(alwaysAsId = true)
 	private Set<ProgramProfileClientException> programProfileClientException;
 	
-	public Set<ProgramProfileClientException> getProgramProfileClientException() {
-		return programProfileClientException;
-	}
-	public void setProgramProfileClientException(Set<ProgramProfileClientException> programProfileClientException) {
-		this.programProfileClientException = programProfileClientException;
-	}
-	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="client")
 	@JsonIdentityReference(alwaysAsId = true)
 	private Set<ClientConfiguration> clientConfiguration;
 	
-	public Set<ClientConfiguration> getClientConfiguration() {
-		return clientConfiguration;
-	}
-	public void setClientConfiguration(Set<ClientConfiguration> clientConfiguration) {
-		this.clientConfiguration = clientConfiguration;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 }

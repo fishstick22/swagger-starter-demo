@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "Clients Communication Configuraton" })
 public class ClientConfigurationController {
 
 	@Autowired
@@ -50,7 +53,7 @@ public class ClientConfigurationController {
 	}
 	
 	@RequestMapping(value="/clientconfiguration/{id}", method = RequestMethod.PUT )
-	public ResponseEntity<ClientConfiguration> updateClientConfiguration(@RequestBody ClientConfiguration clientConfiguration) {
+	public ResponseEntity<ClientConfiguration> updateClientConfiguration(@PathVariable("id") Integer id, @RequestBody ClientConfiguration clientConfiguration) {
 		clientConfigurationService.updateClientConfiguration(clientConfiguration);
 		return new ResponseEntity<ClientConfiguration>(clientConfiguration, HttpStatus.OK);
 	}

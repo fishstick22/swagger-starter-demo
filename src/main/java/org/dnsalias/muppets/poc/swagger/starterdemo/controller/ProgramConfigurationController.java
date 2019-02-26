@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "Program Communication Configuration" })
 public class ProgramConfigurationController {
 
 	@Autowired
@@ -50,7 +53,7 @@ public class ProgramConfigurationController {
 	}
 	
 	@RequestMapping(value="/programconfiguration/{id}", method = RequestMethod.PUT )
-	public ResponseEntity<ProgramConfiguration> updateProgramConfiguration(@RequestBody ProgramConfiguration programConfiguration) {
+	public ResponseEntity<ProgramConfiguration> updateProgramConfiguration(@PathVariable("id") Integer id, @RequestBody ProgramConfiguration programConfiguration) {
 		programConfigurationService.updateProgramConfiguration(programConfiguration);
 		return new ResponseEntity<ProgramConfiguration>(programConfiguration, HttpStatus.OK);
 	}

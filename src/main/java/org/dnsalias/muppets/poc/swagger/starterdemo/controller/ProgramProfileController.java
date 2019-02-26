@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
+@Api(tags = { "AS Programs Profiles" })
 public class ProgramProfileController {
 
 	@Autowired
@@ -50,7 +53,7 @@ public class ProgramProfileController {
 	}
 	
 	@RequestMapping(value="/programprofile/{id}", method = RequestMethod.PUT )
-	public ResponseEntity<ProgramProfile> updateProgramProfile(@RequestBody ProgramProfile programProfile) {
+	public ResponseEntity<ProgramProfile> updateProgramProfile(@PathVariable("id") Integer id, @RequestBody ProgramProfile programProfile) {
 		programProfileService.updateProgramProfile(programProfile);
 		return new ResponseEntity<ProgramProfile>(programProfile, HttpStatus.OK);
 	}

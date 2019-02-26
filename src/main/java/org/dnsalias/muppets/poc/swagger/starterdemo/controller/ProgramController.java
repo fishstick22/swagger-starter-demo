@@ -24,24 +24,24 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin 
 @Controller
 @RequestMapping("/api")
-@Api(value="AS Programs", description="Operations pertaining to Communication Programs")
+@Api(tags = { "AS Programs" })
 public class ProgramController {
 
 	@Autowired
 	private IProgramService programService;
 	
-	@ApiOperation(value = "Search a program with an ID",response = Program.class)
+//	@ApiOperation(value = "Search a program with an ID",response = Program.class)
 	@RequestMapping(value="/program/{id}", method = RequestMethod.GET )
 	public ResponseEntity<Program> getProgramById(@PathVariable("id") Integer id) {
 		Program program = programService.getProgramById(id);
 		return new ResponseEntity<Program>(program, HttpStatus.OK);
 	}
 	
-    @ApiOperation(value = "View a list of available programs",response = List.class)
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved list"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-    })
+//    @ApiOperation(value = "View a list of available programs",response = List.class)
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+//            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+//    })
 	@RequestMapping(value= "/program", method = RequestMethod.GET)
 	public ResponseEntity<List<Program>> getAllPrograms() {
 		List<Program> list = programService.getAllPrograms();
@@ -61,7 +61,7 @@ public class ProgramController {
 	}
 	
 	@RequestMapping(value="/program/{id}", method = RequestMethod.PUT )
-	public ResponseEntity<Program> updateProgram(@RequestBody Program program) {
+	public ResponseEntity<Program> updateProgram(@PathVariable("id") Integer id, @RequestBody Program program) {
 		programService.updateProgram(program);
 		return new ResponseEntity<Program>(program, HttpStatus.OK);
 	}
