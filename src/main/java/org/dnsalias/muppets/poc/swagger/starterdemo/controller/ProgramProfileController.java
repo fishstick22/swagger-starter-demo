@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin
+//@CrossOrigin
 @Controller
 @RequestMapping("/api")
 @Api(tags = { "AS Programs Profiles" })

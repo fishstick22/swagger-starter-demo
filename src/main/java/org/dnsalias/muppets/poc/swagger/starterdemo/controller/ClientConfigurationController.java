@@ -18,10 +18,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin
+//@CrossOrigin
 @Controller
 @RequestMapping("/api")
-@Api(tags = { "Clients Communication Configuraton" })
+@Api(tags = { "Clients Communication Configuration" })
 public class ClientConfigurationController {
 
 	@Autowired

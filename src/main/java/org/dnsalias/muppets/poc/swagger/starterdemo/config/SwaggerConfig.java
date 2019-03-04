@@ -2,8 +2,14 @@ package org.dnsalias.muppets.poc.swagger.starterdemo.config;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -31,7 +37,7 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
                 	new Tag("AS Programs", "Maintain Communication Programs"),
                 	new Tag("AS Programs Profiles", "Maintain Program \"Profile\""),
                 	new Tag("Clients", "View Client Details"),
-                	new Tag("Clients Communication Configuraton", "Maintain Client Communication Rules "),
+                	new Tag("Clients Communication Configuration", "Maintain Client Communication Rules "),
                 	new Tag("Clients Profile Exceptions", "Maintain Client Profile Exceptions"),
                 	new Tag("Communcations", "View Communications Details"),
                 	new Tag("Program Communication Configuration", "Maintain Program Communication Rules")
@@ -55,4 +61,21 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
+
+	@Bean
+
+	public CorsFilter corsFilter() {
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		final CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.setAllowedOrigins(Collections.singletonList("*"));
+		// config.setAllowedOrigins(Collections.singletonList("http://IBMT450PC08KD4P.caremarkrx.net"));
+		//config.setAllowedOrigins(Arrays.asList("localhost", "http://IBMT450PC08KD4P.caremarkrx.net"));
+		config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept"));
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+		source.registerCorsConfiguration("/**", config);
+
+		return new CorsFilter(source);
+
+	}
 }

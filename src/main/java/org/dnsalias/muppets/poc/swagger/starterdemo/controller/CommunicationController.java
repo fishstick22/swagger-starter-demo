@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import io.swagger.annotations.Api;
 
 //http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
-@CrossOrigin 
+//@CrossOrigin 
 @Controller
 @RequestMapping("/api")
 @Api(tags = { "Communcations" })

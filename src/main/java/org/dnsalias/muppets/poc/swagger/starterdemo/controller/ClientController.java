@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import io.swagger.annotations.Api;
 
-@CrossOrigin 
+//@CrossOrigin 
 @Controller
 @RequestMapping("/api")
 @Api(tags = { "Clients" })
